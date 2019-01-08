@@ -1,0 +1,20 @@
+version: 0.0
+os: linux
+files:
+  - source: .
+    destination: /var/www/
+permissions:
+  - object: /var/www/deployment
+    mode: 777
+    type:
+      - file 
+hooks:
+  ApplicationStop:
+    - location: deployment/application_stop.sh
+      timeout: 30
+  ApplicationStart:
+    - location: deployment/application_start.sh
+      timeout: 30
+  ValidateService:
+    - location: deployment/validate.sh
+      timeout: 30
